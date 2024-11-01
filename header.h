@@ -1,3 +1,6 @@
+#ifndef HEADER_H  // Check if HEADER_H is not defined
+#define HEADER_H  // Define HEADER_H
+
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -8,6 +11,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+
 #define MAX_BUF_LEN 1024
 #define CMD_DELIMS " \t\n"
 #define MAX_HISTORY 10
@@ -44,32 +48,31 @@ char *find_command_by_prefix(char *prefix);
 
 /* -------------------------------------------------------------------*/
 
-struct process_info
-{
-  int pid, pgid;
-  char *name;
-  int active;
-};
+// Declare global variables as extern
+extern struct process_info {
+    int pid, pgid;
+    char *name;
+    int active;
+} table[MAX_BUF_LEN];
 
-typedef struct process_info process_info;
-process_info table[MAX_BUF_LEN];
-
-char base_dir[MAX_BUF_LEN];
-char *pipe_cmds[MAX_BUF_LEN];
-char cwd[MAX_BUF_LEN];
+extern char base_dir[MAX_BUF_LEN];
+extern char *pipe_cmds[MAX_BUF_LEN];
+extern char cwd[MAX_BUF_LEN];
 extern char prompt[MAX_BUF_LEN];
-char history[MAX_HISTORY][MAX_BUF_LEN];
+extern char history[MAX_HISTORY][MAX_BUF_LEN];
 
-pid_t my_pid, my_pgid, fgpid;
+extern pid_t my_pid, my_pgid, fgpid;
 
-char *in_file;
-char *out_file;
+extern char *in_file;
+extern char *out_file;
 
-char **input_redirect_cmds;
-char **output_redirect_cmds;
+extern char **input_redirect_cmds;
+extern char **output_redirect_cmds;
 
-int job_num;
-int shell, shell_pgid;
-int output_redi_type, pipe_num;
-int piping, input_redi, output_redi;
-int is_background, input_idx, output_idx;
+extern int job_num;
+extern int shell, shell_pgid;
+extern int output_redi_type, pipe_num;
+extern int piping, input_redi, output_redi;
+extern int is_background, input_idx, output_idx;
+
+#endif // HEADER_H

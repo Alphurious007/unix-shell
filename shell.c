@@ -1,5 +1,30 @@
 #include "header.h"
 
+#include "header.h"
+
+// Define global variables
+struct process_info table[MAX_BUF_LEN];
+char base_dir[MAX_BUF_LEN];
+char *pipe_cmds[MAX_BUF_LEN];
+char cwd[MAX_BUF_LEN];
+char prompt[MAX_BUF_LEN];
+char history[MAX_HISTORY][MAX_BUF_LEN];
+
+pid_t my_pid, my_pgid, fgpid;
+
+char *in_file;
+char *out_file;
+
+char **input_redirect_cmds;
+char **output_redirect_cmds;
+
+int job_num;
+int shell, shell_pgid;
+int output_redi_type, pipe_num;
+int piping, input_redi, output_redi;
+int is_background, input_idx, output_idx;
+
+
 char prompt[MAX_BUF_LEN] = "%";
 
 /*
